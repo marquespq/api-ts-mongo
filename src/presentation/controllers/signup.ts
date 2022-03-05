@@ -3,8 +3,10 @@ import {
   MSG_ERROR_MISSING_EMAIL,
 } from "../../utils/variableGlobal.utils";
 
+import { httpRequest, httpResponse } from "../protocols/http";
+
 export class SignUpController {
-  handle(httpRequest: any): any {
+  handle(httpRequest: httpRequest): httpResponse {
     if (!httpRequest.body.name) {
       return {
         statusCode: 400,

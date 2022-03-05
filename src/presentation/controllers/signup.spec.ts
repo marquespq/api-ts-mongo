@@ -6,7 +6,6 @@ import {
 
 describe("signup Controller", () => {
   it("should return 400 if no name is provided", () => {
-    //se ele não enviar o name no body, retorna um 400
     const sut = new SignUpController();
     const httpRequest = {
       body: {
@@ -21,7 +20,6 @@ describe("signup Controller", () => {
   });
 
   it("should return 400 if no email is provided", () => {
-    //se ele não enviar o name no body, retorna um 400
     const sut = new SignUpController();
     const httpRequest = {
       body: {
