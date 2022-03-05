@@ -4,11 +4,11 @@ import { MissignParamError } from "../errors/missing-param-error";
 
 export class SignUpController {
   handle(httpRequest: httpRequest): httpResponse {
-    if (!httpRequest.body.name) {
-      return badRequest(new MissignParamError("name"));
-    }
-    if (!httpRequest.body.email) {
-      return badRequest(new MissignParamError("email"));
+    const requiredFields = ["name", "email"];
+    for (const field of requiredFields) {
+      if (!httpRequest.body[field]) {
+        return badRequest(new MissignParamError(field));
+      }
     }
   }
 }
