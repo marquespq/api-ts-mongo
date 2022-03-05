@@ -1,0 +1,8 @@
+{
+  "name": "api-ts-mongo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/marquespq/api-ts-mongo.git",
+  "author": "Gabriel Borba Marques <xeroxsulensino@hotmail.com>",
+  "license": "MIT"
+}
