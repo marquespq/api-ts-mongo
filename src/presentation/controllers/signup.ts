@@ -1,23 +1,14 @@
-import {
-  MSG_ERROR_MISSING_NAME,
-  MSG_ERROR_MISSING_EMAIL,
-} from "../../utils/variableGlobal.utils";
-
 import { httpRequest, httpResponse } from "../protocols/http";
+import { badRequest } from "../helpers/http-helpers";
+import { MissignParamError } from "../errors/missing-param-error";
 
 export class SignUpController {
   handle(httpRequest: httpRequest): httpResponse {
     if (!httpRequest.body.name) {
-      return {
-        statusCode: 400,
-        body: new Error(MSG_ERROR_MISSING_NAME),
-      };
+      return badRequest(new MissignParamError("name"));
     }
     if (!httpRequest.body.email) {
-      return {
-        statusCode: 400,
-        body: new Error(MSG_ERROR_MISSING_EMAIL),
-      };
+      return badRequest(new MissignParamError("email"));
     }
   }
 }

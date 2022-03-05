@@ -1,8 +1,5 @@
 import { SignUpController } from "./signup";
-import {
-  MSG_ERROR_MISSING_NAME,
-  MSG_ERROR_MISSING_EMAIL,
-} from "../../utils/variableGlobal.utils";
+import { MissignParamError } from "../errors/missing-param-error";
 
 describe("signup Controller", () => {
   it("should return 400 if no name is provided", () => {
@@ -16,7 +13,7 @@ describe("signup Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error(MSG_ERROR_MISSING_NAME));
+    expect(httpResponse.body).toEqual(new MissignParamError("name"));
   });
 
   it("should return 400 if no email is provided", () => {
@@ -30,6 +27,6 @@ describe("signup Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error(MSG_ERROR_MISSING_EMAIL));
+    expect(httpResponse.body).toEqual(new MissignParamError("email"));
   });
 });
