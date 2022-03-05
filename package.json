@@ -6,7 +6,7 @@
   "author": "Gabriel Borba Marques <xeroxsulensino@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
