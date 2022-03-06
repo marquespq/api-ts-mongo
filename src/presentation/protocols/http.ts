@@ -1,8 +1,10 @@
-export interface httpResponse {
-  statusCode: number;
-  body: any;
+interface httpResponse {
+  statusCode: number
+  body: any
 }
 
-export interface httpRequest {
-  body?: any;
+interface httpRequest {
+  body?: any
 }
+
+export { httpRequest, httpResponse }
