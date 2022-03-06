@@ -1,4 +1,4 @@
-import { badRequest, serverError } from "../../helpers/http-helpers";
+import { badRequest, serverError, ok } from "../../helpers/http-helpers";
 import {
   Controler,
   httpRequest,
@@ -17,7 +17,7 @@ export class SignUpController implements Controler {
     this.addAccount = addAccount;
   }
 
-  handle(httpRequest: httpRequest): httpResponse {
+  async handle(httpRequest: httpRequest): Promise<httpResponse> {
     try {
       const { name, email, password, passwordConfirmation } = httpRequest.body;
 
@@ -41,16 +41,13 @@ export class SignUpController implements Controler {
       if (!isValid) {
         return badRequest(new InvalidParamError("email"));
       }
-      const account = this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password,
       });
 
-      return {
-        statusCode: 200,
-        body: account,
-      };
+      return ok(account);
     } catch (error) {
       return serverError();
     }
