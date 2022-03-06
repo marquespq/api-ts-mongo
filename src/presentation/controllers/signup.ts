@@ -6,16 +6,20 @@ import {
   EmailValidator,
 } from "../protocols";
 import { InvalidParamError, MissignParamError } from "../errors";
+import { AddAccount } from "../../domain/useCases/add-account";
 
 export class SignUpController implements Controler {
   private readonly emailValidator: EmailValidator;
-  constructor(emailValidator: EmailValidator) {
+  private readonly addAccount: AddAccount;
+
+  constructor(emailValidator: EmailValidator, addAccount: AddAccount) {
     this.emailValidator = emailValidator;
+    this.addAccount = addAccount;
   }
 
   handle(httpRequest: httpRequest): httpResponse {
     try {
-      const { email, password, passwordConfirmation } = httpRequest.body;
+      const { name, email, password, passwordConfirmation } = httpRequest.body;
 
       const requiredFields = [
         "name",
@@ -37,6 +41,11 @@ export class SignUpController implements Controler {
       if (!isValid) {
         return badRequest(new InvalidParamError("email"));
       }
+      this.addAccount.add({
+        name,
+        email,
+        password,
+      });
     } catch (error) {
       return serverError();
     }
